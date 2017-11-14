@@ -22,3 +22,17 @@ For the Alias, add the following to your app config:
 ```
     'UUID' => TakeawayTown\LaravelUuid\Uuid::class,
 ```
+
+## Basic Usage
+The most basic generator usage is:
+```
+Uuid::generate();
+```
+
+This will generate a version 1 UUID object, using a random MAC address.
+
+You can also generate a UUID string using type-hinting or using a method. Either of the following is exactly the same:
+```
+(string) Uuid::generate();
+Uuid::generate()->string;
+```
