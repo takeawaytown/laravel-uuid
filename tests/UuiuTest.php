@@ -4,6 +4,10 @@ use TakeawayTown\LaravelUuid\Uuid;
 
 class UuidTest extends PHPUnit\Framework\TestCase
 {
+  // public function __construct() {
+  //   $this->macAdress = Faker\Provider\Internet::macAddress();
+  // }
+
   public function testVersionOneGeneration()
   {
     $uuid = Uuid::generate(1);
@@ -202,6 +206,66 @@ class UuidTest extends PHPUnit\Framework\TestCase
   {
     $uuid = Uuid::generate(5, 'takeawaytown.co.uk', Uuid::NS_DNS);
     $this->assertEquals(1, $uuid->variant);
+  }
+
+  public function testCorrectNodeOfGeneratedVersionOneUuid()
+  {
+    $macAdress = Faker\Provider\Internet::macAddress();
+    $uuid = Uuid::generate(1, $macAdress);
+    $this->assertEquals(strtolower(str_replace(':', '', $macAdress)), $uuid->node);
+  }
+
+  public function testNullNodeOfGeneratedVersionThreeUuid()
+  {
+    $macAdress = Faker\Provider\Internet::macAddress();
+    $uuid = Uuid::generate(3, $macAdress, Uuid::NS_DNS);
+    $this->assertNull($uuid->node);
+    $uuidThree = Uuid::generate(4, $macAdress);
+    $this->assertNull($uuidThree->node);
+    $uuidThree = Uuid::generate(5, $macAdress, Uuid::NS_DNS);
+    $this->assertNull($uuidThree->node);
+  }
+
+  public function testNullNodeOfGeneratedVersionFourUuid()
+  {
+    $macAdress = Faker\Provider\Internet::macAddress();
+    $uuid = Uuid::generate(4, $macAdress);
+    $this->assertNull($uuid->node);
+  }
+
+  public function testNullNodeOfGeneratedVersionFiveUuid()
+  {
+    $macAdress = Faker\Provider\Internet::macAddress();
+    $uuid = Uuid::generate(5, $macAdress, Uuid::NS_DNS);
+    $this->assertNull($uuid->node);
+  }
+
+  public function testCorrectVersionOfImportedVersionOneUuid()
+  {
+    $uuid = Uuid::generate(1);
+    $imported = Uuid::import((string) $uuid);
+    $this->assertEquals($uuid->version, $imported->version);
+  }
+
+  public function testCorrectVersionOfImportedVersionThreeUuid()
+  {
+    $uuid = Uuid::generate(3, 'takeawaytown.co.uk', Uuid::NS_DNS);
+    $imported = Uuid::import((string) $uuid);
+    $this->assertEquals($uuid->version, $imported->version);
+  }
+
+  public function testCorrectVersionOfImportedVersionFourUuid()
+  {
+    $uuid = Uuid::generate(4);
+    $imported = Uuid::import((string) $uuid);
+    $this->assertEquals($uuid->version, $imported->version);
+  }
+
+  public function testCorrectVersionOfImportedVersionFiveUuid()
+  {
+    $uuid = Uuid::generate(5, 'takeawaytown.co.uk', Uuid::NS_DNS);
+    $imported = Uuid::import((string) $uuid);
+    $this->assertEquals($uuid->version, $imported->version);
   }
 
 }
