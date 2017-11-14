@@ -18,6 +18,11 @@
             "email": "codetheorist@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "TakeawayTown\\LaravelUuid\\": "src"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
