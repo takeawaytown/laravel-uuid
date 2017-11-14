@@ -47,9 +47,14 @@ class Uuid
   const VERSION_5 = 80;
 
   /**
+   * Namespace UUIDs
    * @var string
    */
   const NS_DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
+  const NS_URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
+  const NS_OID = '6ba7b812-9dad-11d1-80b4-00c04fd430c8';
+  const NS_X500 = '6ba7b814-9dad-11d1-80b4-00c04fd430c8';
+  const NS_NIL = '00000000-0000-0000-0000-000000000000';
 
   const MD5 = 3;
   const SHA1 = 5;
@@ -70,12 +75,6 @@ class Uuid
    * @var int
    */
   const VAR_MS = 192;
-
-  /**
-   * The nil UUID is special form of UUID that is specified to have all 128 bits set to zero.
-   * @link http://tools.ietf.org/html/rfc4122#section-4.1.7
-   */
-  const NIL = '00000000-0000-0000-0000-000000000000';
 
   /**
   * @param string $uuid

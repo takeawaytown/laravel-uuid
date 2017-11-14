@@ -34,13 +34,13 @@ class UuidTest extends PHPUnit\Framework\TestCase
 
   public function testAllZeroUuidEquals()
   {
-      $uuid = Uuid::import(Uuid::NIL);
-      $this->assertEquals(Uuid::NIL, (string) $uuid);
+      $uuid = Uuid::import(Uuid::NS_NIL);
+      $this->assertEquals(Uuid::NS_NIL, (string) $uuid);
   }
 
   public function testAllZeroUuidInstance()
   {
-      $uuid = Uuid::import(Uuid::NIL);
+      $uuid = Uuid::import(Uuid::NS_NIL);
       $this->assertInstanceOf('TakeawayTown\LaravelUuid\Classes\Uuid', $uuid);
   }
 
