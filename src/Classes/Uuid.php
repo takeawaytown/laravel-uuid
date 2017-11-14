@@ -262,53 +262,53 @@ class Uuid
       return ($uuid);
   }
 
-  /**
-   * Randomness is returned as a string of bytes
-   *
-   * @param $bytes
-   * @return string
-   */
-  public static function randomBytes($bytes)
-  {
-    return random_bytes($bytes);
-  }
+    /**
+    * Randomness is returned as a string of bytes
+    *
+    * @param $bytes
+    * @return string
+    */
+    public static function randomBytes($bytes)
+    {
+        return random_bytes($bytes);
+    }
 
-  /**
-   * Generates a version 4 UUID, which are derived solely from random numbers.
-   *
-   * @return string
-   */
-  protected static function randomGenerator()
-  {
-    $uuid = static::randomBytes(16);
-    $uuid[8] = chr(ord($uuid[8]) & static::CLEAR_VAR | static::VAR_RFC);
-    $uuid[6] = chr(ord($uuid[6]) & static::CLEAR_VER | static::VERSION_4);
+    /**
+    * Generates a version 4 UUID, which are derived solely from random numbers.
+    *
+    * @return string
+    */
+    protected static function randomGenerator()
+    {
+        $uuid = static::randomBytes(16);
+        $uuid[8] = chr(ord($uuid[8]) & static::CLEAR_VAR | static::VAR_RFC);
+        $uuid[6] = chr(ord($uuid[6]) & static::CLEAR_VER | static::VERSION_4);
 
-    return $uuid;
-  }
+        return $uuid;
+    }
 
-  /**
-   * Import a pre-existing UUID
-   *
-   * @param string $uuid
-   * @return Uuid
-   */
-  public static function import($uuid)
-  {
-    return new static(static::makeBinary($uuid, 16));
-  }
+    /**
+    * Import a pre-existing UUID
+    *
+    * @param string $uuid
+    * @return Uuid
+    */
+    public static function import($uuid)
+    {
+        return new static(static::makeBinary($uuid, 16));
+    }
 
-  /**
-   * Import and validate an UUID
-   *
-   * @param Uuid|string $uuid
-   *
-   * @return boolean
-   */
-  public static function validate($uuid)
-  {
-    return (boolean) preg_match('~' . static::REGEX . '~', static::import($uuid)->string);
-  }
+    /**
+    * Import and validate an UUID
+    *
+    * @param Uuid|string $uuid
+    *
+    * @return boolean
+    */
+    public static function validate($uuid)
+    {
+        return (boolean) preg_match('~' . static::REGEX . '~', static::import($uuid)->string);
+    }
 
     /**
     * @param string $var
