@@ -31,10 +31,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "TakeawayTown\\Uuid\\UuidServiceProvider"
+                "TakeawayTown\\LaravelUuid\\UuidServiceProvider"
             ],
             "aliases": {
-                "Uuid": "TakeawayTown\\Uuid\\Uuid"
+                "Uuid": "TakeawayTown\\LaravelUuid\\Uuid"
             }
         }
     },

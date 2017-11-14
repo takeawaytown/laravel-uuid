@@ -1,13 +1,13 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use TakeawayTown\Uuid\Uuid;
+use TakeawayTown\LaravelUuid\Uuid;
 
 class UuidTest extends TestCase
 {
     public function testStaticGeneration()
     {
         $uuid = Uuid::generate(1);
-        $this->assertInstanceOf('TakeawayTown\Uuid\Uuid', $uuid);
+        $this->assertInstanceOf('TakeawayTown\LaravelUuid\Uuid', $uuid);
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a8db302d1bcf34a9dfc56762a896b532",
+    "content-hash": "b396039925ebf9b72ffd8ec4950a1764",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -232,12 +232,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "47a543f5bd0801eed2082f9ecbae0c849ec32a4b"
+                "reference": "66830867b889aafd2385af29cd8a640648c94549"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/47a543f5bd0801eed2082f9ecbae0c849ec32a4b",
-                "reference": "47a543f5bd0801eed2082f9ecbae0c849ec32a4b",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/66830867b889aafd2385af29cd8a640648c94549",
+                "reference": "66830867b889aafd2385af29cd8a640648c94549",
                 "shasum": ""
             },
             "require": {
@@ -357,7 +357,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2017-11-13T20:04:10+00:00"
+            "time": "2017-11-14T14:27:43+00:00"
         },
         {
             "name": "league/flysystem",
