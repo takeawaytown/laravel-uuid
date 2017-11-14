@@ -12,90 +12,90 @@ use TakeawayTown\LaravelUuid\Providers\UuidServiceProvider;
  **/
 class Uuid
 {
-  /**
-   * Time (in 100ns steps) between the start of the UTC and Unix epochs
-   *
-   * @var int
-   */
-  const INTERVAL = 0x01b21dd213814000;
+    /**
+     * Time (in 100ns steps) between the start of the UTC and Unix epochs
+     *
+     * @var int
+     */
+    const INTERVAL = 0x01b21dd213814000;
 
-  /**
-   * Clears all relevant bits of variant byte with AND
-   *
-   * @var int
-   */
-  const CLEAR_VAR = 63;
+    /**
+     * Clears all relevant bits of variant byte with AND
+     *
+     * @var int
+     */
+    const CLEAR_VAR = 63;
 
-  /**
-   * Clears all bits of version byte with AND
-   * @var int
-   */
-  const CLEAR_VER = 15;
+    /**
+     * Clears all bits of version byte with AND
+     * @var int
+     */
+    const CLEAR_VER = 15;
 
-  /**
-   * The RFC 4122 variant
-   *
-   * @var int
-   */
-  const VAR_RFC = 128;
+    /**
+     * The RFC 4122 variant
+     *
+     * @var int
+     */
+    const VAR_RFC = 128;
 
-  /**
-   * Version constants
-   * @var int
-   */
-  const VERSION_1 = 16;
-  const VERSION_3 = 48;
-  const VERSION_4 = 64;
-  const VERSION_5 = 80;
+    /**
+     * Version constants
+     * @var int
+     */
+    const VERSION_1 = 16;
+    const VERSION_3 = 48;
+    const VERSION_4 = 64;
+    const VERSION_5 = 80;
 
-  /**
-   * Namespace UUIDs
-   * @var string
-   */
-  const NS_DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
-  const NS_URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
-  const NS_OID = '6ba7b812-9dad-11d1-80b4-00c04fd430c8';
-  const NS_X500 = '6ba7b814-9dad-11d1-80b4-00c04fd430c8';
-  const NS_NIL = '00000000-0000-0000-0000-000000000000';
+    /**
+     * Namespace UUIDs
+     * @var string
+     */
+    const NS_DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
+    const NS_URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
+    const NS_OID = '6ba7b812-9dad-11d1-80b4-00c04fd430c8';
+    const NS_X500 = '6ba7b814-9dad-11d1-80b4-00c04fd430c8';
+    const NS_NIL = '00000000-0000-0000-0000-000000000000';
 
-  const MD5 = 3;
-  const SHA1 = 5;
+    const MD5 = 3;
+    const SHA1 = 5;
 
-  /**
-   * Regular expression for validation of UUID.
-   */
-  const REGEX = '^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$';
+    /**
+     * Regular expression for validation of UUID.
+     */
+    const REGEX = '^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$';
 
-  /**
-   * Variant reserved for future use
-   * @var int
-   */
-  const VAR_RES = 224;
+    /**
+     * Variant reserved for future use
+     * @var int
+     */
+    const VAR_RES = 224;
 
-  /**
-   * Microsoft UUID variant
-   * @var int
-   */
-  const VAR_MS = 192;
+    /**
+     * Microsoft UUID variant
+     * @var int
+     */
+    const VAR_MS = 192;
 
-  /**
-  * @param string $uuid
-  * @throws Exception
-  */
-  protected function __construct($uuid) {
-    if (!empty($uuid) && strlen($uuid) !== 16) {
-      throw new Exception('Input must be a 128-bit integer.');
+    /**
+    * @param string $uuid
+    * @throws Exception
+    */
+    protected function __construct($uuid) {
+        if (!empty($uuid) && strlen($uuid) !== 16) {
+          throw new Exception('Input must be a 128-bit integer.');
+        }
+
+        $this->bytes = $uuid;
+
+        // Optimize the most common use
+        $this->string = bin2hex(substr($uuid, 0, 4)) . "-" .
+        bin2hex(substr($uuid, 4, 2)) . "-" .
+        bin2hex(substr($uuid, 6, 2)) . "-" .
+        bin2hex(substr($uuid, 8, 2)) . "-" .
+        bin2hex(substr($uuid, 10, 6));
     }
-
-    $this->bytes = $uuid;
-
-    // Optimize the most common use
-    $this->string = bin2hex(substr($uuid, 0, 4)) . "-" .
-    bin2hex(substr($uuid, 4, 2)) . "-" .
-    bin2hex(substr($uuid, 6, 2)) . "-" .
-    bin2hex(substr($uuid, 8, 2)) . "-" .
-    bin2hex(substr($uuid, 10, 6));
-  }
 
   /**
    * Generates a UUID, with the verion being based on $ver
@@ -310,75 +310,75 @@ class Uuid
     return (boolean) preg_match('~' . static::REGEX . '~', static::import($uuid)->string);
   }
 
-  /**
-   * @param string $var
-   * @return string|string|number|number|number|number|number|NULL|number|NULL|NULL
-   */
-  public function __get($var)
-  {
-    switch ($var) {
-      case "bytes":
-        return $this->bytes;
-        break;
-      case "hex":
-        return bin2hex($this->bytes);
-        break;
-      case "node":
-        if (ord($this->bytes[6]) >> 4 == 1) {
-            return bin2hex(substr($this->bytes, 10));
-        } else {
-            return null;
-        }
-        break;
-      case "string":
-        return $this->__toString();
-        break;
-      case "time":
-        if (ord($this->bytes[6]) >> 4 == 1) {
-          // Restore contiguous big-endian byte order
-          $time = bin2hex($this->bytes[6] . $this->bytes[7] . $this->bytes[4] . $this->bytes[5] .
-              $this->bytes[0] . $this->bytes[1] . $this->bytes[2] . $this->bytes[3]);
-          // Clear version flag
-          $time[0] = "0";
+    /**
+    * @param string $var
+    * @return string|string|number|number|number|number|number|NULL|number|NULL|NULL
+    */
+    public function __get($var)
+    {
+        switch ($var) {
+            case "bytes":
+                return $this->bytes;
+                break;
+            case "hex":
+                return bin2hex($this->bytes);
+                break;
+            case "node":
+                if (ord($this->bytes[6]) >> 4 == 1) {
+                    return bin2hex(substr($this->bytes, 10));
+                } else {
+                    return null;
+                }
+                break;
+            case "string":
+                return $this->__toString();
+                break;
+            case "time":
+                if (ord($this->bytes[6]) >> 4 == 1) {
+                    // Restore contiguous big-endian byte order
+                    $time = bin2hex($this->bytes[6] . $this->bytes[7] . $this->bytes[4] . $this->bytes[5] .
+                    $this->bytes[0] . $this->bytes[1] . $this->bytes[2] . $this->bytes[3]);
+                    // Clear version flag
+                    $time[0] = "0";
 
-          // Do some reverse arithmetic to get a Unix timestamp
-          return (hexdec($time) - static::INTERVAL) / 10000000;
-        } else {
-          return null;
+                    // Do some reverse arithmetic to get a Unix timestamp
+                    return (hexdec($time) - static::INTERVAL) / 10000000;
+                } else {
+                    return null;
+                }
+                break;
+            case "urn":
+                return "urn:uuid:" . $this->__toString();
+                break;
+            case "variant":
+                $byte = ord($this->bytes[8]);
+                if ($byte >= static::VAR_RES) {
+                    return 3;
+                } elseif ($byte >= static::VAR_MS) {
+                    return 2;
+                } elseif ($byte >= static::VAR_RFC) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+                break;
+            case "version":
+                return ord($this->bytes[6]) >> 4;
+                break;
+            default:
+                return null;
+                break;
         }
-        break;
-      case "urn":
-        return "urn:uuid:" . $this->__toString();
-        break;
-      case "variant":
-        $byte = ord($this->bytes[8]);
-        if ($byte >= static::VAR_RES) {
-          return 3;
-        } elseif ($byte >= static::VAR_MS) {
-          return 2;
-        } elseif ($byte >= static::VAR_RFC) {
-          return 1;
-        } else {
-          return 0;
-        }
-        break;
-      case "version":
-        return ord($this->bytes[6]) >> 4;
-        break;
-      default:
-        return null;
-        break;
     }
-  }
 
-  /**
-   * Return the UUID
-   *
-   * @return string
-   */
-  public function __toString()
-  {
-    return $this->string;
-  }
+    /**
+    * Return the UUID
+    *
+    * @return string
+    */
+    public function __toString()
+    {
+        return $this->string;
+    }
 
 }
