@@ -85,7 +85,7 @@ class Uuid
     protected function __construct($uuid)
     {
         if (!empty($uuid) && strlen($uuid) !== 16) {
-            throw new Exception('Input must be a 128-bit integer.');
+            throw new InvalidArgumentException('Input must be a 128-bit integer.');
         }
 
         $this->bytes = $uuid;
@@ -116,7 +116,7 @@ class Uuid
             case 1:
                 return new static(static::timeGenerator($node));
             case 2:
-                throw new Exception('Version ' . $ver . ' is unsupported.');
+                throw new UnexpectedValueException('Version ' . $ver . ' is unsupported.');
             case 3:
                 return new static(static::nameGenerator(static::MD5, $node, $namespace));
             case 4:
@@ -124,7 +124,7 @@ class Uuid
             case 5:
                 return new static(static::nameGenerator(static::SHA1, $node, $namespace));
             default:
-                throw new Exception('Version ' . $ver . ' is unsupported.');
+                throw new UnexpectedValueException('Version ' . $ver . ' is unsupported.');
         }
     }
 
@@ -230,13 +230,13 @@ class Uuid
     protected static function nameGenerator($ver, $node, $namespace)
     {
         if (empty($node)) {
-            throw new Exception('A name-string is required for Version 3 or 5 UUIDs.');
+            throw new InvalidArgumentException('A name-string is required for Version 3 or 5 UUIDs.');
         }
 
         // if the namespace UUID isn't binary, make it so
         $namespace = static::makeBinary($namespace, 16);
         if (is_null($namespace)) {
-            throw new Exception('A binary namespace is required for Version 3 or 5 UUIDs.');
+            throw new InvalidArgumentException('A binary namespace is required for Version 3 or 5 UUIDs.');
         }
 
         $version = null;
