@@ -85,7 +85,7 @@ class Uuid
     protected function __construct($uuid)
     {
         if (!empty($uuid) && strlen($uuid) !== 16) {
-          throw new Exception('Input must be a 128-bit integer.');
+            throw new Exception('Input must be a 128-bit integer.');
         }
 
         $this->bytes = $uuid;
@@ -107,7 +107,7 @@ class Uuid
     * @return UUID          Returns a formatted UUID
     * @throws Exception
     */
-    public static function generate($ver = null, $node = null, $ns = null)
+    public static function generate($ver = null, $node = null, $namespace = null)
     {
         $ver = $ver !== null ? $ver : config('uuid.default_version');
         $node = $node !== null ? $node : config('uuid.default_node');
@@ -118,11 +118,11 @@ class Uuid
             case 2:
                 throw new Exception('Version ' . $ver . ' is unsupported.');
             case 3:
-                return new static(static::nameGenerator(static::MD5, $node, $ns));
+                return new static(static::nameGenerator(static::MD5, $node, $namespace));
             case 4:
                 return new static(static::randomGenerator());
             case 5:
-                return new static(static::nameGenerator(static::SHA1, $node, $ns));
+                return new static(static::nameGenerator(static::SHA1, $node, $namespace));
             default:
                 throw new Exception('Version ' . $ver . ' is unsupported.');
         }
@@ -227,15 +227,15 @@ class Uuid
      * @return string A fully-formatted, version 3 or 5 UUID
      * @throws Exception
      */
-    protected static function nameGenerator($ver, $node, $ns)
+    protected static function nameGenerator($ver, $node, $namespace)
     {
         if (empty($node)) {
             throw new Exception('A name-string is required for Version 3 or 5 UUIDs.');
         }
 
         // if the namespace UUID isn't binary, make it so
-        $ns = static::makeBinary($ns, 16);
-        if (is_null($ns)) {
+        $namespace = static::makeBinary($namespace, 16);
+        if (is_null($namespace)) {
             throw new Exception('A binary namespace is required for Version 3 or 5 UUIDs.');
         }
 
@@ -245,15 +245,15 @@ class Uuid
         switch ($ver) {
             case static::MD5:
                 $version = static::VERSION_3;
-                $uuid = md5($ns . $node, 1);
+                $uuid = md5($namespace . $node, 1);
                 break;
             case static::SHA1:
                 $version = static::VERSION_5;
-                $uuid = substr(sha1($ns . $node, 1), 0, 16);
+                $uuid = substr(sha1($namespace . $node, 1), 0, 16);
                 break;
             default:
                 $version = static::VERSION_3;
-                $uuid = md5($ns . $node, 1);
+                $uuid = md5($namespace . $node, 1);
                 break;
         }
 
@@ -350,10 +350,8 @@ class Uuid
                 } else {
                     return null;
                 }
-                break;
             case "urn":
                 return "urn:uuid:" . $this->__toString();
-                break;
             case "variant":
                 $byte = ord($this->bytes[8]);
                 if ($byte >= static::VAR_RES) {
@@ -365,13 +363,10 @@ class Uuid
                 } else {
                     return 0;
                 }
-                break;
             case "version":
                 return ord($this->bytes[6]) >> 4;
-                break;
             default:
-                return null;
-                break;
+                return;
         }
     }
 
