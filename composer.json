@@ -18,5 +18,15 @@
             "email": "codetheorist@gmail.com"
         }
     ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TakeawayTown\\Uuid\\UuidServiceProvider"
+            ],
+            "aliases": {
+                "Uuid": "TakeawayTown\\Uuid\\Uuid"
+            }
+        }
+    },
     "minimum-stability": "dev"
 }
