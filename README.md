@@ -15,12 +15,12 @@ The package automatically registers the Service Provider and Alias in Laravel 5.
 
 For the Service Provider, add the following to your app config file:
 ```
-    TakeawayTown\LaravelUuid\UuidServiceProvider::class,
+    TakeawayTown\LaravelUuid\Providers\UuidServiceProvider::class,
 ```
 
 For the Alias, add the following to your app config:
 ```
-    'UUID' => TakeawayTown\LaravelUuid\Uuid::class,
+    'UUID' => TakeawayTown\LaravelUuid\Classes\Uuid::class,
 ```
 
 ## Basic Usage
