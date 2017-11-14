@@ -3,6 +3,8 @@
 # Laravel UUID
 A package for working with UUID values in Laravel.
 
+You can use the package to generate and validate version 1, 3, 4 and 5 UUID identifiers.
+
 ## Installation
 To install, simply type the following at your bash prompt:
 ```
