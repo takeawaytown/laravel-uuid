@@ -313,20 +313,20 @@ class Uuid
     {
         switch ($var) {
             case "bytes":
-                $result = $this->bytes;
+                return $this->bytes;
                 // no break
             case "hex":
-                $result = bin2hex($this->bytes);
+                return bin2hex($this->bytes);
                 // no break
             case "node":
                 if (ord($this->bytes[6]) >> 4 == 1) {
-                    $result = bin2hex(substr($this->bytes, 10));
+                    return bin2hex(substr($this->bytes, 10));
                 } else {
-                    $result = null;
+                    return null;
                 }
                 // no break
             case "string":
-                $result = (string) $this->__toString();
+                return (string) $this->__toString();
                 // no break
             case "time":
                 if (ord($this->bytes[6]) >> 4 == 1) {
@@ -337,34 +337,33 @@ class Uuid
                     $time[0] = "0";
 
                     // Do some reverse arithmetic to get a Unix timestamp
-                    $result = (int) (hexdec($time) - static::INTERVAL) / 10000000;
+                    return (int) (hexdec($time) - static::INTERVAL) / 10000000;
                 } else {
-                    $result = null;
+                    return null;
                 }
                 // no break
             case "urn":
-                $result = "urn:uuid:" . $this->__toString();
+                return "urn:uuid:" . $this->__toString();
                 // no break
             case "variant":
                 $byte = ord($this->bytes[8]);
                 if ($byte >= static::VAR_RES) {
-                    $result = (int) 3;
+                    return (int) 3;
                 } elseif ($byte >= static::VAR_MS) {
-                    $result = (int) 2;
+                    return (int) 2;
                 } elseif ($byte >= static::VAR_RFC) {
-                    $result = (int) 1;
+                    return (int) 1;
                 } else {
-                    $result = (int) 0;
+                    return (int) 0;
                 }
                 // no break
             case "version":
-                $result = (int) ord($this->bytes[6]) >> 4;
+                return (int) ord($this->bytes[6]) >> 4;
                 // no break
             default:
-                $result = null;
+                return;
                 // no break
         }
-        return $result;
     }
 
     /**
