@@ -3,6 +3,8 @@
 namespace TakeawayTown\LaravelUuid\Classes;
 
 use Exception;
+use Illuminate\Support\Facades\Config;
+use TakeawayTown\LaravelUuid\Providers\UuidServiceProvider;
 
 /**
  * Class Uuid
@@ -104,7 +106,10 @@ class Uuid
    * @return UUID          Returns a formatted UUID
    * @throws Exception
    */
-  public static function generate($ver = 1, $node = null, $ns = null) {
+  public static function generate($ver = null, $node = null, $ns = null) {
+
+    $ver = $ver !== null ? $ver : config('uuid.default_version');
+    $node = $node !== null ? $node : config('uuid.default_node');
     /* Create a new UUID based on provided data. */
     switch ((int)$ver) {
       case 1:

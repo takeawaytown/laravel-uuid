@@ -19,4 +19,16 @@ class UuidServiceProvider extends ServiceProvider
       ]);
     }
   }
+
+  /**
+   * Register bindings in the container.
+   *
+   * @return void
+   */
+  public function register()
+  {
+      $this->mergeConfigFrom(
+          __DIR__.'/../../config/uuid.php', 'uuid'
+      );
+  }
 }
