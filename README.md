@@ -1,4 +1,21 @@
 [![Build Status](https://travis-ci.org/takeawaytown/laravel-uuid.svg?branch=master)](https://travis-ci.org/takeawaytown/laravel-uuid)
 
-# laravel-uuid
-A package for using correctly-formatted UUID values in Laravel.
+# Laravel UUID
+A package for working with UUID values in Laravel.
+
+To install, simply type the following at your bash prompt:
+```
+composer require takeawaytown/laravel-uuid
+```
+
+The package automatically registers the Service Provider and Alias in Laravel 5.5 and above. If using Laravel <= 5.4, then you must manually add them.
+
+For the Service Provider, add the following to your app config file:
+```
+    TakeawayTown\LaravelUuid\UuidServiceProvider::class,
+```
+
+For the Alias, add the following to your app config:
+```
+    'UUID' => TakeawayTown\LaravelUuid\Uuid::class,
+```
