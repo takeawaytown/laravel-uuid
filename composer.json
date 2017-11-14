@@ -1,6 +1,6 @@
 {
     "name": "takeawaytown/laravel-uuid",
-    "description": "A package for using 'Universally Unique Identifiers' with models in Laravel.",
+    "description": "A package for using 'Universally Unique Identifiers' in Laravel.",
     "type": "library",
     "require": {
         "illuminate/support": "5.2.*|5.3.*|5.4.*|5.5.*",
