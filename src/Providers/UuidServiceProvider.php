@@ -1,6 +1,6 @@
 <?php
 
-namespace TakeawayTown\LaravelUuid;
+namespace TakeawayTown\LaravelUuid\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

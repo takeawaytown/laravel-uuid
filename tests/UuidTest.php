@@ -1,6 +1,6 @@
 <?php
 
-use TakeawayTown\LaravelUuid\Uuid;
+use TakeawayTown\LaravelUuid\Classes\Uuid;
 
 class UuidTest extends PHPUnit\Framework\TestCase
 {
@@ -11,25 +11,25 @@ class UuidTest extends PHPUnit\Framework\TestCase
   public function testVersionOneGeneration()
   {
     $uuid = Uuid::generate(1);
-    $this->assertInstanceOf('TakeawayTown\LaravelUuid\Uuid', $uuid);
+    $this->assertInstanceOf('TakeawayTown\LaravelUuid\Classes\Uuid', $uuid);
   }
 
   public function testVersionThreeGeneration()
   {
     $uuid = Uuid::generate(3, 'takeawaytown.co.uk', Uuid::NS_DNS);
-    $this->assertInstanceOf('TakeawayTown\LaravelUuid\Uuid', $uuid);
+    $this->assertInstanceOf('TakeawayTown\LaravelUuid\Classes\Uuid', $uuid);
   }
 
   public function testVersionFourGeneration()
   {
     $uuid = Uuid::generate(4);
-    $this->assertInstanceOf('TakeawayTown\LaravelUuid\Uuid', $uuid);
+    $this->assertInstanceOf('TakeawayTown\LaravelUuid\Classes\Uuid', $uuid);
   }
 
   public function testVersionFiveGeneration()
   {
     $uuid = Uuid::generate(5, 'takeawaytown.co.uk', Uuid::NS_DNS);
-    $this->assertInstanceOf('TakeawayTown\LaravelUuid\Uuid', $uuid);
+    $this->assertInstanceOf('TakeawayTown\LaravelUuid\Classes\Uuid', $uuid);
   }
 
   public function testAllZeroUuidEquals()
@@ -41,7 +41,7 @@ class UuidTest extends PHPUnit\Framework\TestCase
   public function testAllZeroUuidInstance()
   {
       $uuid = Uuid::import('00000000-0000-0000-0000-000000000000');
-      $this->assertInstanceOf('TakeawayTown\LaravelUuid\Uuid', $uuid);
+      $this->assertInstanceOf('TakeawayTown\LaravelUuid\Classes\Uuid', $uuid);
   }
 
   public function testGenerationOfVersionOneViaRegex()

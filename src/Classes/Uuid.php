@@ -1,6 +1,6 @@
 <?php
 
-namespace TakeawayTown\LaravelUuid;
+namespace TakeawayTown\LaravelUuid\Classes;
 
 use Exception;
 
