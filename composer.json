@@ -23,6 +23,11 @@
             "TakeawayTown\\LaravelUuid\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "TakeawayTown\\LaravelUuid\\": "src"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
