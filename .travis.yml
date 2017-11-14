@@ -24,8 +24,13 @@ matrix:
     - php: 7.2
       env: COMPOSER_ARGS="--prefer-lowest"
 
+before_script:
+  - composer self-update
+  - composer install --no-interaction
+  - php artisan key:generate
 
 script:
   - vendor/bin/phpunit --verbose
 
 sudo: false
+
