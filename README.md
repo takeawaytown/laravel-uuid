@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/takeawaytown/laravel-uuid.svg?branch=master)](https://travis-ci.org/takeawaytown/laravel-uuid)
+[![Maintainability](https://api.codeclimate.com/v1/badges/75f553048705643b0387/maintainability)](https://codeclimate.com/github/takeawaytown/laravel-uuid/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/75f553048705643b0387/test_coverage)](https://codeclimate.com/github/takeawaytown/laravel-uuid/test_coverage)
 
 # Laravel UUID
 A package for working with UUID values in Laravel.
