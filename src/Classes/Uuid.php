@@ -361,7 +361,7 @@ class Uuid
                 return (int) ord($this->bytes[6]) >> 4;
                 // no break
             default:
-                return;
+                return null;
                 // no break
         }
     }
