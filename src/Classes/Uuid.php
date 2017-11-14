@@ -82,7 +82,8 @@ class Uuid
     * @param string $uuid
     * @throws Exception
     */
-    protected function __construct($uuid) {
+    protected function __construct($uuid)
+    {
         if (!empty($uuid) && strlen($uuid) !== 16) {
           throw new Exception('Input must be a 128-bit integer.');
         }
@@ -106,8 +107,8 @@ class Uuid
     * @return UUID          Returns a formatted UUID
     * @throws Exception
     */
-    public static function generate($ver = null, $node = null, $ns = null) {
-
+    public static function generate($ver = null, $node = null, $ns = null)
+    {
         $ver = $ver !== null ? $ver : config('uuid.default_version');
         $node = $node !== null ? $node : config('uuid.default_node');
         /* Create a new UUID based on provided data. */
@@ -196,7 +197,8 @@ class Uuid
         }
     }
 
-    protected static function timeString() {
+    protected static function timeString()
+    {
 
         // Get time since Gregorian calendar reform in 100ns intervals
         $time = microtime(1) * 10000000 + static::INTERVAL;
