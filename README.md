@@ -3,6 +3,7 @@
 # Laravel UUID
 A package for working with UUID values in Laravel.
 
+## Installation
 To install, simply type the following at your bash prompt:
 ```
 composer require takeawaytown/laravel-uuid
