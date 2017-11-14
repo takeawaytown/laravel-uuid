@@ -335,7 +335,7 @@ class Uuid
                 }
                 // no break
             case "string":
-                return $this->__toString();
+                return (string) $this->__toString();
                 // no break
             case "time":
                 if (ord($this->bytes[6]) >> 4 == 1) {
@@ -346,7 +346,7 @@ class Uuid
                     $time[0] = "0";
 
                     // Do some reverse arithmetic to get a Unix timestamp
-                    return (hexdec($time) - static::INTERVAL) / 10000000;
+                    return (int) (hexdec($time) - static::INTERVAL) / 10000000;
                 } else {
                     return null;
                 }
@@ -357,17 +357,17 @@ class Uuid
             case "variant":
                 $byte = ord($this->bytes[8]);
                 if ($byte >= static::VAR_RES) {
-                    return 3;
+                    return (int) 3;
                 } elseif ($byte >= static::VAR_MS) {
-                    return 2;
+                    return (int) 2;
                 } elseif ($byte >= static::VAR_RFC) {
-                    return 1;
+                    return (int) 1;
                 } else {
-                    return 0;
+                    return (int) 0;
                 }
                 // no break
             case "version":
-                return ord($this->bytes[6]) >> 4;
+                return (int) ord($this->bytes[6]) >> 4;
                 // no break
             default:
                 return;
