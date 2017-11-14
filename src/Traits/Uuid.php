@@ -21,9 +21,9 @@ trait Uuid
     });
 
     static::saving(function ($model) {
-      $original_uuid = $model->getOriginal(config('uuid.uuid_column'));
-      if ($original_uuid !== $model->{config('uuid.uuid_column')}) {
-        $model->{config('uuid.uuid_column')} = $original_uuid;
+      $uuid = $model->getOriginal(config('uuid.uuid_column'));
+      if ($uuid !== $model->{config('uuid.uuid_column')}) {
+        $model->{config('uuid.uuid_column')} = $uuid;
       }
     });
   }

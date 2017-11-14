@@ -72,6 +72,12 @@ class Uuid
   const VAR_MS = 192;
 
   /**
+   * The nil UUID is special form of UUID that is specified to have all 128 bits set to zero.
+   * @link http://tools.ietf.org/html/rfc4122#section-4.1.7
+   */
+  const NIL = '00000000-0000-0000-0000-000000000000';
+
+  /**
   * @param string $uuid
   * @throws Exception
   */
