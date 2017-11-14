@@ -1,9 +1,8 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use TakeawayTown\LaravelUuid\Uuid;
 
-class UuidTest extends TestCase
+class UuidTest extends PHPUnit\Framework\TestCase
 {
   public function testVersionOneGeneration()
   {
