@@ -249,10 +249,6 @@ class Uuid
                 $version = static::VERSION_5;
                 $uuid = substr(sha1($namespace . $node, 1), 0, 16);
                 break;
-            default:
-                $version = static::VERSION_3;
-                $uuid = md5($namespace . $node, 1);
-                break;
         }
 
         $uuid[8] = chr(ord($uuid[8]) & static::CLEAR_VAR | static::VAR_RFC);
