@@ -12,6 +12,8 @@ install:
   - travis_retry composer install --no-interaction
 
 env:
+  global:
+    - CC_TEST_REPORTER_ID=fcb659ec3019103178f8770cf74dabda64eeec32d272e0544b4b139fac42e41d
   matrix:
     - COMPOSER_ARGS=""
     - COMPOSER_ARGS="--prefer-lowest"
@@ -19,9 +21,14 @@ env:
 before_script:
   - composer self-update
   - composer install --no-interaction
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
   - phpunit --verbose
 
-sudo: false
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
+sudo: false
