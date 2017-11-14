@@ -27,6 +27,7 @@ trait Uuid
       }
     });
   }
+
   /**
    * Scope  by uuid
    * @param  string  uuid of the model.

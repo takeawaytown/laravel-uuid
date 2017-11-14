@@ -27,6 +27,7 @@ class UuidTest extends \Orchestra\Testbench\TestCase
     $app['config']->set('uuid.default_node', 'https://takeawaytown.co.uk');
   }
 
+
   // public function __construct() {
   //   $this->macAdress = Faker\Provider\Internet::macAddress();
   // }
@@ -118,6 +119,12 @@ class UuidTest extends \Orchestra\Testbench\TestCase
   {
     $uuid = Uuid::generate(3, Config::get('uuid.default_node'), Uuid::NS_DNS);
     $this->assertTrue(Uuid::validate($uuid->string));
+  }
+
+  public function testVersionThreeValidatorHex()
+  {
+    $uuid = Uuid::generate(3, Config::get('uuid.default_node'), Uuid::NS_DNS);
+    $this->assertTrue(Uuid::validate($uuid->hex));
   }
 
   public function testVersionThreeValidatorBytes()
