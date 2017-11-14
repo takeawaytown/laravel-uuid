@@ -229,18 +229,16 @@ class Uuid
      */
     protected static function nameGenerator($ver, $node, $namespace)
     {
-        if (empty($node)) {
-            throw new InvalidArgumentException('A name-string is required for Version 3 or 5 UUIDs.');
-        }
-
         // if the namespace UUID isn't binary, make it so
         $namespace = static::makeBinary($namespace, 16);
-        if (is_null($namespace)) {
-            throw new InvalidArgumentException('A binary namespace is required for Version 3 or 5 UUIDs.');
-        }
-
         $version = null;
         $uuid = null;
+
+        if (empty($node)) {
+            throw new InvalidArgumentException('A name-string is required for Version 3 or 5 UUIDs.');
+        } else if (is_null($namespace)) {
+            throw new InvalidArgumentException('A binary namespace is required for Version 3 or 5 UUIDs.');
+        }
 
         switch ($ver) {
             case static::MD5:
@@ -257,10 +255,7 @@ class Uuid
                 break;
         }
 
-        // set variant
         $uuid[8] = chr(ord($uuid[8]) & static::CLEAR_VAR | static::VAR_RFC);
-
-        // set version
         $uuid[6] = chr(ord($uuid[6]) & static::CLEAR_VER | $version);
 
         return ($uuid);
