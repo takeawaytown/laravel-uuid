@@ -31,7 +31,9 @@ The most basic generator usage is:
 Uuid::generate();
 ```
 
-This will generate a UUID object, which will be 'Version 1' and will use a random MAC address. You can also generate a UUID string using type-hinting or using a method. Either of the following is exactly the same:
+This will generate a UUID object, which will be 'Version 1' and will use a random MAC address.
+
+You can also generate a UUID string using type-hinting or using a method. Either of the following is exactly the same:
 ```
 (string) Uuid::generate();
 Uuid::generate()->string;
