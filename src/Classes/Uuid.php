@@ -111,25 +111,21 @@ class Uuid
     {
         $ver = $ver !== null ? $ver : config('uuid.default_version');
         $node = $node !== null ? $node : config('uuid.default_node');
-
-        if ((int)$ver === 2) {
-            throw new UnexpectedValueException('Version ' . $ver . ' is unsupported.');
-        }
         /* Create a new UUID based on provided data. */
         switch ((int)$ver) {
             case 1:
-                $result = new static(static::timeGenerator($node));
+                return new static(static::timeGenerator($node));
+            case 2:
+                throw new UnexpectedValueException('Version ' . $ver . ' is unsupported.');
             case 3:
-                $result = new static(static::nameGenerator(static::MD5, $node, $namespace));
+                return new static(static::nameGenerator(static::MD5, $node, $namespace));
             case 4:
-                $result = new static(static::randomGenerator());
+                return new static(static::randomGenerator());
             case 5:
-                $result = new static(static::nameGenerator(static::SHA1, $node, $namespace));
+                return new static(static::nameGenerator(static::SHA1, $node, $namespace));
             default:
                 throw new UnexpectedValueException('Version ' . $ver . ' is unsupported.');
         }
-
-        return = $result;
     }
 
     /**
